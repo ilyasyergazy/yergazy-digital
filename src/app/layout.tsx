@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     images: [{ url: '/og.jpg', width: 1200, height: 630, alt: 'Ильяс Ергазы – маркетинг под ключ' }],
   },
   twitter: { card: 'summary_large_image' },
-  icons: { icon: '/icon.png', apple: '/icon.png' },
+  icons: { icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/icon.png', type: 'image/png' }], apple: '/apple-icon.png' },
   robots: { index: true, follow: true },
 };
 
