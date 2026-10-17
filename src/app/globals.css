@@ -215,3 +215,7 @@ a:hover .play,.thumb:hover .play{transform:scale(1.1);box-shadow:0 0 0 12px rgba
 .zoomov .zx{position:fixed;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:#2E2E2E;color:#F6F5F4;font:400 26px/1 Montserrat,sans-serif;cursor:pointer}
 @media (max-width:899px){.zoomov{cursor:default}.zoomov .zsc{padding:12px}.zoomov img{width:100%;padding:6px;border-radius:8px}}
 @media (max-height:720px){#menu .mn{margin-top:12px}#menu .mn a{font-size:26px;padding:6px 0}#menu .mc{margin-top:16px;padding-top:16px}#menu .mf{padding-top:20px;gap:10px}#menu .b1,#menu .b2{padding:16px}}
+
+/* archived for now: free tools and blog (restore by deleting this block) */
+#tools,#blog,#m-tools,#m-blog{display:none!important}
+a[href="#tools"],a[href="#blog"],a[href="/#tools"],a[href="/#blog"],a[href="/blog"],a[href^="/tools"]{display:none!important}
