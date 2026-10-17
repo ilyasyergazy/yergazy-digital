@@ -384,6 +384,13 @@ export function initSite(): () => void {
     menu.classList.add('on'); menu.setAttribute('aria-hidden', 'false'); doc.style.overflow = 'hidden';
   });
   menu.querySelector('[data-menu-close]')?.addEventListener('click', closeMenu);
+  menu.querySelector('[data-open-task]')?.addEventListener('click', (e) => {
+    e.preventDefault(); e.stopPropagation(); closeMenu(); setTimeout(() => openModal('task'), 250);
+  });
+  // safety net: if a #form link ever navigates instead of being intercepted, open the form anyway
+  on('hashchange', () => {
+    if (location.hash === '#form') { history.replaceState(null, '', location.pathname + location.search); closeMenu(); openModal('task'); }
+  });
   on('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeMenu(); } });
 
   /* ---------- screenshot zoom ---------- */
