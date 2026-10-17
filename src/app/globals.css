@@ -191,7 +191,7 @@ a:hover .play,.thumb:hover .play{transform:scale(1.1);box-shadow:0 0 0 12px rgba
   .mb{padding:17px}
 }
 
-.ldot{position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:#9A9792;animation:lose 3.2s linear infinite}
-.ldotv{position:absolute;left:-3px;width:8px;height:8px;border-radius:50%;background:#9A9792;animation:losev 3.2s linear infinite}
+.ldot{position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:#9A9792;animation:lose 5.5s linear infinite}
+.ldotv{position:absolute;left:-3px;width:8px;height:8px;border-radius:50%;background:#9A9792;animation:losev 5.5s linear infinite}
 @keyframes lose{0%{left:0;opacity:1}50%{left:calc(50% - 5px);opacity:1}72%{left:calc(70% - 5px);opacity:0}100%{left:calc(70% - 5px);opacity:0}}
 @keyframes losev{0%{top:0;opacity:1}50%{top:calc(50% - 4px);opacity:1}72%{top:calc(70% - 4px);opacity:0}100%{top:calc(70% - 4px);opacity:0}}
