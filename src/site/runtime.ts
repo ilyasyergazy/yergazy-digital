@@ -1,4 +1,5 @@
 /* Interactions and motion for the main page. Runs once on the client. */
+import { FAQ } from './faq';
 
 type Win = Window & {
   ym?: (id: number, action: string, goal: string) => void;
@@ -6,17 +7,7 @@ type Win = Window & {
   fbq?: (...args: unknown[]) => void;
 };
 
-// Ответы на частые вопросы. Пустая строка = ответ ещё не написан.
-const ANSWERS: Record<string, string> = {
-  'отлича': '',
-  'времени': '',
-  'бюджет': '',
-  'только с рекламой': '',
-  'уже работает': '',
-  'не в маркетинге': '',
-  'начинается': '',
-};
-const ANSWER_FALLBACK = 'ответ скоро появится – а пока можно спросить меня напрямую в whatsapp';
+const ANSWER_FALLBACK = 'напишите мне в whatsapp – отвечу лично';
 
 export function initSite(): () => void {
   const w = window as Win;
@@ -153,7 +144,7 @@ export function initSite(): () => void {
   document.querySelectorAll<HTMLElement>('.faq').forEach((f) => {
     const q = f.textContent || '';
     let txt = ANSWER_FALLBACK;
-    for (const k in ANSWERS) { if (q.includes(k)) { txt = ANSWERS[k] || ANSWER_FALLBACK; break; } }
+    for (const f2 of FAQ) { if (q.includes(f2.key)) { txt = f2.a; break; } }
     const a = document.createElement('div');
     a.className = 'ans';
     a.innerHTML = '<div><p></p></div>';
@@ -253,7 +244,7 @@ export function initSite(): () => void {
     ov.querySelectorAll<HTMLElement>('[data-note]').forEach((n) => { n.innerHTML = noteText(); });
     const lt = ov.querySelector<HTMLElement>('[data-lt]');
     if (lt) {
-      lt.innerHTML = isM() ? '10 бюджетных<br>способов привлечь<br>новых клиентов' : '10 бюджетных способов<br>привлечь новых клиентов';
+      lt.innerHTML = isM() ? '10 бесплатных<br>способов привлечь<br>новых клиентов' : '10 бесплатных способов<br>привлечь новых клиентов';
       lt.style.fontSize = isM() ? '26px' : '30px';
     }
     if (need) ov.querySelectorAll<HTMLElement>('.ch').forEach((c) => { if (c.textContent === need) c.classList.add('on'); });

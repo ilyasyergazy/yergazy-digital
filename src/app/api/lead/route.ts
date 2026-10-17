@@ -16,7 +16,7 @@ type Lead = {
 const FORMS: Record<string, string> = {
   task: 'обсудить задачу',
   final: 'форма внизу страницы',
-  checklist: 'чек-лист · 10 бюджетных способов',
+  checklist: 'чек-лист · 10 бесплатных способов',
 };
 
 const clean = (v: unknown, max = 200) => String(v ?? '').replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, max);
