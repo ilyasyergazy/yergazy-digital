@@ -10,7 +10,7 @@ const PIXEL = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: 'маркетинг под ключ – Ильяс Ергазы | yergazy digital',
+    default: 'yergazy digital | маркетинг под ключ',
     template: '%s | yergazy digital',
   },
   description:
