@@ -250,9 +250,23 @@ export function initSite(): () => void {
     if (need) ov.querySelectorAll<HTMLElement>('.ch').forEach((c) => { if (c.textContent === need) c.classList.add('on'); });
     lastFocus = document.activeElement as HTMLElement;
     ov.classList.add('on'); ov.setAttribute('aria-hidden', 'false'); openOv = ov;
+    fitModal();
     doc.style.overflow = 'hidden';
     setTimeout(() => (form.querySelector('input[name=name]') as HTMLElement)?.focus({ preventScroll: true }), 450);
   };
+  // a popup must never need scrolling: shrink it to the screen if it is still too tall
+  const fitModal = () => {
+    if (!openOv) return;
+    const m = openOv.querySelector('.mdl') as HTMLElement;
+    m.style.zoom = '1';
+    m.style.maxHeight = 'none';
+    const avail = window.innerHeight - (isM() ? 8 : 32);
+    const h = m.scrollHeight;
+    const z = Math.min(1, avail / h);
+    m.style.zoom = String(Math.max(0.7, z));
+    if (z < 0.7) m.style.maxHeight = ''; // extremely short screens: fall back to scrolling
+  };
+  on('resize', fitModal);
   const closeModal = () => {
     if (!openOv) return;
     openOv.classList.remove('on'); openOv.setAttribute('aria-hidden', 'true'); openOv = null;
@@ -296,7 +310,7 @@ export function initSite(): () => void {
       setTimeout(() => {
         form.classList.add('hide'); form.classList.remove('out'); form.reset();
         form.querySelectorAll('.ch.on').forEach((c) => c.classList.remove('on'));
-        done.classList.remove('hide'); done.classList.add('pre'); void done.offsetWidth; done.classList.remove('pre');
+        done.classList.remove('hide'); done.classList.add('pre'); void done.offsetWidth; done.classList.remove('pre'); fitModal();
       }, 320);
       toast(kind === 'lead' ? 'чек-лист готов' : 'заявка отправлена');
     });
