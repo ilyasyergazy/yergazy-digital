@@ -391,6 +391,7 @@ export function initSite(): () => void {
   const start = () => { if (started) return; started = true; playHero(root()); };
   if (document.fonts?.ready) document.fonts.ready.then(() => setTimeout(start, 60));
   setTimeout(start, 900);
+  if (location.hash === '#form') setTimeout(() => { history.replaceState(null, '', location.pathname); openModal('task'); }, 700);
 
   return () => cleanups.forEach((f) => f());
 }
