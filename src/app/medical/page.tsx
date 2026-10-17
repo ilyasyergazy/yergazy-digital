@@ -3,7 +3,7 @@ import Soon from '@/components/Soon';
 
 export const metadata: Metadata = {
   title: 'Маркетинг для клиник и врачей',
-  description: 'Продвижение медицинских клиник и частных врачей в Алматы и по Казахстану.',
+  description: 'Продвижение медицинских клиник и частных врачей по Казахстану и СНГ.',
   alternates: { canonical: '/medical' },
 };
 
