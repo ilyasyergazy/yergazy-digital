@@ -386,6 +386,21 @@ export function initSite(): () => void {
   menu.querySelector('[data-menu-close]')?.addEventListener('click', closeMenu);
   on('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeMenu(); } });
 
+  /* ---------- screenshot zoom ---------- */
+  document.querySelectorAll<HTMLImageElement>('.shot img').forEach((img) => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      const z = document.createElement('div');
+      z.className = 'zoomov';
+      z.innerHTML = `<div class="zsc"><img src="${img.currentSrc || img.src}" alt="${img.alt}"></div><button type="button" class="zx" aria-label="закрыть">×</button>`;
+      document.body.appendChild(z);
+      doc.style.overflow = 'hidden';
+      requestAnimationFrame(() => z.classList.add('on'));
+      const close = () => { z.classList.remove('on'); doc.style.overflow = ''; setTimeout(() => z.remove(), 250); };
+      z.addEventListener('click', (e) => { if ((e.target as HTMLElement).tagName !== 'IMG' || !isM()) close(); });
+    });
+  });
+
   /* ---------- start ---------- */
   let started = false;
   const start = () => { if (started) return; started = true; playHero(root()); };

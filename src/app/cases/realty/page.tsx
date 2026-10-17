@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { siteCss } from '@/site/markup';
 import { caseCss, caseDesk, caseMob } from '@/site/case-realty';
+import { overlaysHtml } from '@/site/overlays';
+import SiteRuntime from '@/components/SiteRuntime';
 
 export const metadata: Metadata = {
   title: 'Кейс: 5000+ заявок для застройщика',
@@ -17,6 +19,8 @@ export default function Page() {
         <div id="desk" dangerouslySetInnerHTML={{ __html: caseDesk }} />
         <div id="mob" dangerouslySetInnerHTML={{ __html: caseMob }} />
       </main>
+      <div dangerouslySetInnerHTML={{ __html: overlaysHtml }} />
+      <SiteRuntime />
     </>
   );
 }
