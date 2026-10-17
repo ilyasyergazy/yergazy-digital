@@ -363,7 +363,7 @@ export function initSite(): () => void {
     if (!a) return;
     const h = a.getAttribute('href') as string;
     e.preventDefault();
-    if (a.closest('#menu')) { closeMenu(); setTimeout(() => go(h.slice(1)), 350); return; }
+    if (a.closest('#menu')) { closeMenu(); setTimeout(() => (h === '#form' ? openModal('task') : go(h.slice(1))), 350); return; }
     if (h === '#form') { openModal('task', a.dataset.need); return; }
     if (h === '#lead') { openModal('lead'); return; }
     go(h.slice(1));
@@ -380,7 +380,7 @@ export function initSite(): () => void {
     menu.classList.remove('on'); menu.setAttribute('aria-hidden', 'true'); doc.style.overflow = '';
   }
   mob.querySelector('button[aria-label="меню"]')?.addEventListener('click', () => {
-    menu.querySelectorAll<HTMLElement>('a').forEach((a, i) => { a.style.transitionDelay = `${0.08 + i * 0.06}s`; });
+    menu.querySelectorAll<HTMLElement>('.mn a, .mc, .mf').forEach((a, i) => { a.style.transitionDelay = `${0.08 + i * 0.05}s`; });
     menu.classList.add('on'); menu.setAttribute('aria-hidden', 'false'); doc.style.overflow = 'hidden';
   });
   menu.querySelector('[data-menu-close]')?.addEventListener('click', closeMenu);
