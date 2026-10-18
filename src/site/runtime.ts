@@ -191,7 +191,9 @@ export function initSite(): () => void {
       const ymId = Number(doc.dataset.ym || 0);
       if (ymId && w.ym) w.ym(ymId, 'reachGoal', name);
       w.gtag?.('event', name === 'lead' ? 'generate_lead' : 'checklist_download');
-      w.fbq?.('track', 'Lead', { content_name: name });
+      const site = location.pathname.startsWith('/medical') ? 'медицина' : 'бизнес';
+      if (name === 'lead') w.fbq?.('track', 'Lead', { content_name: 'заявка', content_category: site });
+      else w.fbq?.('track', 'CompleteRegistration', { content_name: 'чек-лист', content_category: site });
     } catch { /* analytics optional */ }
   };
   const spinBtn = (btn: HTMLElement, label: string) => {
