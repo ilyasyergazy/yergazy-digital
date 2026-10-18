@@ -229,3 +229,17 @@ a[href="#tools"],a[href="#blog"],a[href="/#tools"],a[href="/#blog"],a[href="/blo
 
 /* horizontal swipers: lock to sideways scrolling */
 .vrow,.row{overscroll-behavior-x:contain;touch-action:pan-x pan-y;scroll-snap-type:x proximity!important;-webkit-overflow-scrolling:touch}
+
+/* ad-cabinet fullscreen gallery */
+.cab{touch-action:pan-y pinch-zoom;user-select:none;-webkit-user-select:none}
+.cabov{position:fixed;inset:0;z-index:200;background:rgba(14,14,14,.94);display:flex;align-items:center;opacity:0;transition:opacity .25s ease}
+.cabov.on{opacity:1}
+.cabov .cg-v{width:100%;overflow:hidden;touch-action:pan-y pinch-zoom}
+.cabov .cg-t{display:flex}
+.cabov .cg-s{flex:0 0 100%;box-sizing:border-box;padding:24px 88px;display:flex;align-items:center;justify-content:center;cursor:zoom-out}
+.cabov .cg-s img{display:block;width:min(1600px,100%);height:auto;border-radius:10px;background:#fff;padding:10px;box-sizing:border-box;cursor:default}
+.cabov .cg-a{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:#2E2E2E;color:#F6F5F4;font:400 22px/1 Montserrat,sans-serif;cursor:pointer}
+.cabov .cg-p{left:20px}.cabov .cg-n{right:20px}
+.cabov .cg-c{position:fixed;left:0;right:0;bottom:22px;text-align:center;font:500 14px/1 Montserrat,sans-serif;color:#A3A3A3}
+.cabov .zx{position:fixed;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:#2E2E2E;color:#F6F5F4;font:400 26px/1 Montserrat,sans-serif;cursor:pointer}
+@media (max-width:899px){.cabov .cg-s{padding:12px}.cabov .cg-s img{padding:6px;border-radius:8px}.cabov .cg-a{display:none}}

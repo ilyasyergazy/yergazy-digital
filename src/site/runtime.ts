@@ -426,6 +426,77 @@ export function initSite(): () => void {
     });
   });
 
+  /* ---------- ad-cabinet slider: autoplay, swipe, dots, fullscreen gallery ---------- */
+  const swipe = (el: HTMLElement, track: HTMLElement, get: () => number, set: (i: number) => void, onTap: (() => void) | null, onUser: () => void) => {
+    let x0 = 0, y0 = 0, dx = 0, mode: '' | 'x' | 'y' = '', down = false;
+    el.addEventListener('touchstart', (e) => { const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; dx = 0; mode = ''; down = e.touches.length === 1; }, { passive: true });
+    el.addEventListener('touchmove', (e) => {
+      if (!down || e.touches.length > 1) { down = false; return; }
+      const t = e.touches[0]; dx = t.clientX - x0; const dy = t.clientY - y0;
+      if (!mode && Math.abs(dx) + Math.abs(dy) > 8) mode = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (mode === 'x') { e.preventDefault(); track.style.transition = 'none'; track.style.transform = `translateX(calc(${-get() * 100}% + ${dx}px))`; }
+    }, { passive: false });
+    el.addEventListener('touchend', () => {
+      if (!down) return; down = false;
+      if (mode === 'x') { onUser(); set(get() + (dx < -40 ? 1 : dx > 40 ? -1 : 0)); }
+      else if (!mode && onTap) onTap();
+    });
+  };
+  const gallery = (srcs: string[], alt: string, start: number) => {
+    const n = srcs.length; let i = start;
+    const z = document.createElement('div');
+    z.className = 'cabov';
+    z.innerHTML = `<div class="cg-v"><div class="cg-t">${srcs.map((s, k) => `<div class="cg-s"><img src="${s}" alt="${k === 0 ? alt : ''}"></div>`).join('')}</div></div>`
+      + '<button type="button" class="cg-a cg-p" aria-label="назад">←</button><button type="button" class="cg-a cg-n" aria-label="вперёд">→</button>'
+      + '<div class="cg-c"></div><button type="button" class="zx" aria-label="закрыть">×</button>';
+    document.body.appendChild(z);
+    doc.style.overflow = 'hidden';
+    const t = z.querySelector('.cg-t') as HTMLElement, c = z.querySelector('.cg-c') as HTMLElement;
+    const set = (k: number, anim = true) => {
+      i = Math.max(0, Math.min(n - 1, k));
+      t.style.transition = anim ? 'transform .35s cubic-bezier(.2,.7,.2,1)' : 'none';
+      t.style.transform = `translateX(${-i * 100}%)`;
+      c.textContent = `${i + 1} / ${n}`;
+    };
+    set(i, false);
+    requestAnimationFrame(() => z.classList.add('on'));
+    const close = () => { z.classList.remove('on'); doc.style.overflow = ''; document.removeEventListener('keydown', key); setTimeout(() => z.remove(), 250); };
+    const key = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') set(i + 1); if (e.key === 'ArrowLeft') set(i - 1); };
+    document.addEventListener('keydown', key);
+    (z.querySelector('.cg-p') as HTMLElement).onclick = () => set(i - 1);
+    (z.querySelector('.cg-n') as HTMLElement).onclick = () => set(i + 1);
+    (z.querySelector('.zx') as HTMLElement).onclick = close;
+    const t0 = Date.now();
+    z.addEventListener('click', (e) => { const el = e.target as HTMLElement; if (Date.now() - t0 < 600) return; if (el.classList.contains('cg-s') || el.classList.contains('cabov')) close(); });
+    swipe(z.querySelector('.cg-v') as HTMLElement, t, () => i, set, null, () => {});
+  };
+  document.querySelectorAll<HTMLElement>('[data-cab]').forEach((cab) => {
+    const track = cab.querySelector('.cab-t') as HTMLElement;
+    const imgs = Array.from(track.querySelectorAll('img'));
+    const dots = Array.from(cab.querySelectorAll<HTMLElement>('.cab-d i'));
+    const n = imgs.length; let i = 0, auto = true, seen = false;
+    track.style.animation = 'none';
+    dots.forEach((d) => { d.style.animation = 'none'; d.style.cursor = 'pointer'; d.style.transition = 'width .3s ease, background .3s ease'; });
+    const set = (k: number, anim = true) => {
+      i = (k + n) % n;
+      track.style.transition = anim ? 'transform .55s cubic-bezier(.2,.7,.2,1)' : 'none';
+      track.style.transform = `translateX(${-i * 100}%)`;
+      dots.forEach((d, j) => { d.style.width = j === i ? '18px' : '6px'; d.style.background = j === i ? '#1B1B1B' : '#D2CFCB'; });
+    };
+    const stop = () => { auto = false; };
+    set(0, false);
+    const io = new IntersectionObserver((es) => { seen = es[0].isIntersecting; }, { threshold: 0.3 });
+    io.observe(cab);
+    const timer = window.setInterval(() => { if (auto && seen && !document.hidden) set(i + 1); }, 4000);
+    cleanups.push(() => { clearInterval(timer); io.disconnect(); });
+    const open = () => { stop(); gallery(imgs.map((im) => im.currentSrc || im.src), imgs[0].alt, i); };
+    dots.forEach((d, j) => d.addEventListener('click', (e) => { e.stopPropagation(); stop(); set(j); }));
+    let lastTouch = 0;
+    cab.addEventListener('touchstart', () => { lastTouch = Date.now(); }, { passive: true });
+    swipe(cab, track, () => i, (k) => set(Math.max(0, Math.min(n - 1, k))), open, stop);
+    cab.addEventListener('click', (e) => { if (Date.now() - lastTouch > 800 && !(e.target as HTMLElement).closest('.cab-d')) open(); });
+  });
+
   /* ---------- start ---------- */
   let started = false;
   const start = () => { if (started) return; started = true; playHero(root()); };

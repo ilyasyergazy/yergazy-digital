@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { medCss, medDesk, medMob } from '@/site/med-markup';
-import { overlaysHtml } from '@/site/overlays';
+import { overlaysMed } from '@/site/overlays-med';
 import SiteRuntime from '@/components/SiteRuntime';
 import { FAQ } from '@/site/faq';
 
@@ -11,10 +11,6 @@ export const metadata: Metadata = {
   openGraph: { title: 'маркетинг для клиник и врачей – yergazy digital', images: [{ url: '/og.jpg', width: 1200, height: 630 }] },
 };
 
-const overlaysMed = overlaysHtml
-  .replace('/img/logo-yergazy.png" alt="yergazy digital"', '/img/med/logo-yergazy-medical-light.png" alt="yergazy medical"')
-  .replace('<a href="#cases">кейсы</a>', '<a style="pointer-events:none">кейсы</a><a href="#faq">вопросы</a>')
-  .replace('<a href="/medical">для клиник и врачей</a>', '<a href="/">для бизнеса</a>');
 
 const faqLd = {
   '@context': 'https://schema.org',
