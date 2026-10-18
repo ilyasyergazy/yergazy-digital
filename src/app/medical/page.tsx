@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   openGraph: { title: 'маркетинг для клиник и врачей – yergazy digital', images: [{ url: '/og.jpg', width: 1200, height: 630 }] },
 };
 
+const overlaysMed = overlaysHtml
+  .replace('/img/logo-yergazy.png" alt="yergazy digital"', '/img/med/logo-yergazy-medical-light.png" alt="yergazy medical"')
+  .replace('<a href="#cases">кейсы</a>', '<a style="pointer-events:none">кейсы</a><a href="#faq">вопросы</a>')
+  .replace('<a href="/medical">для клиник и врачей</a>', '<a href="/">для бизнеса</a>');
+
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -25,7 +30,7 @@ export default function Page() {
         <div id="desk" dangerouslySetInnerHTML={{ __html: medDesk }} />
         <div id="mob" dangerouslySetInnerHTML={{ __html: medMob }} />
       </main>
-      <div dangerouslySetInnerHTML={{ __html: overlaysHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: overlaysMed }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <SiteRuntime />
     </>
