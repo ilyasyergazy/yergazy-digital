@@ -393,6 +393,24 @@ export function initSite(): () => void {
   });
   on('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeMenu(); } });
 
+  /* ---------- video popups (youtube shorts) ---------- */
+  document.querySelectorAll<HTMLAnchorElement>('a[data-yt]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = a.dataset.yt as string;
+      const z = document.createElement('div');
+      z.className = 'vidov';
+      z.innerHTML = `<div class="vfr"><iframe src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0" title="видео" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div><button type="button" class="zx" aria-label="закрыть">×</button>`;
+      document.body.appendChild(z);
+      doc.style.overflow = 'hidden';
+      requestAnimationFrame(() => z.classList.add('on'));
+      const close = () => { z.classList.remove('on'); doc.style.overflow = ''; setTimeout(() => z.remove(), 250); document.removeEventListener('keydown', esc); };
+      const esc = (ev: KeyboardEvent) => { if (ev.key === 'Escape') close(); };
+      document.addEventListener('keydown', esc);
+      z.addEventListener('click', (ev) => { if (!(ev.target as HTMLElement).closest('.vfr')) close(); });
+    });
+  });
+
   /* ---------- screenshot zoom ---------- */
   document.querySelectorAll<HTMLImageElement>('.shot img').forEach((img) => {
     img.style.cursor = 'zoom-in';
