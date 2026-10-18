@@ -4,7 +4,7 @@ import './globals.css';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://yergazy.digital';
 const YM = process.env.NEXT_PUBLIC_YM_ID;
-const GA = process.env.NEXT_PUBLIC_GA_ID;
+const GA = process.env.NEXT_PUBLIC_GA_ID || 'G-P2F94TQXNY';
 const PIXEL = process.env.NEXT_PUBLIC_META_PIXEL_ID || '1627560044994442';
 
 export const metadata: Metadata = {
