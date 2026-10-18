@@ -61,6 +61,7 @@ export async function POST(req: Request) {
   }
   const from = source(utm, clean(body.referrer, 300));
   const page = clean(body.page, 120) || '/';
+  const site = page.startsWith('/medical') ? 'медицина' : 'бизнес';
   const time = new Intl.DateTimeFormat('ru-RU', {
     timeZone: 'Asia/Almaty', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit',
   }).format(new Date());
@@ -70,7 +71,8 @@ export async function POST(req: Request) {
   const chat = process.env.TELEGRAM_CHAT_ID;
   if (token && chat) {
     const text = [
-      `<b>новая заявка · ${esc(form)}</b>`,
+      `<b>${site === 'медицина' ? '🩺 ' : ''}новая заявка · ${site}</b>`,
+      `форма: ${esc(form)}`,
       '',
       `имя: ${esc(name)}`,
       `телефон: ${esc(phone)}`,
@@ -99,7 +101,7 @@ export async function POST(req: Request) {
       fetch(sheet, {
         method: 'POST',
         headers: { 'content-type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ time, form, name, phone, needs: needs.join(', '), source: from, page, ...utm }),
+        body: JSON.stringify({ time, site, form, name, phone, needs: needs.join(', '), source: from, page, ...utm }),
         redirect: 'follow',
       }).then((r) => { if (!r.ok) throw new Error('sheets ' + r.status); }),
     );
