@@ -226,3 +226,6 @@ a[href="#tools"],a[href="#blog"],a[href="/#tools"],a[href="/#blog"],a[href="/blo
 .vidov .vfr{height:min(86vh,calc(92vw*16/9));aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#000}
 .vidov iframe{width:100%;height:100%;border:0;display:block}
 .vidov .zx{position:fixed;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:#2E2E2E;color:#F6F5F4;font:400 26px/1 Montserrat,sans-serif;cursor:pointer}
+
+/* horizontal swipers: lock to sideways scrolling */
+.vrow,.row{overscroll-behavior-x:contain;touch-action:pan-x pan-y;scroll-snap-type:x proximity!important;-webkit-overflow-scrolling:touch}

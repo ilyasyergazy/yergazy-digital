@@ -120,7 +120,7 @@ export function initSite(): () => void {
         const cs = getComputedStyle(k);
         const stagger = (cs.display === 'grid')
           || (k.children.length > 2 && cs.display === 'flex' && cs.flexDirection !== 'row' && !!k.querySelector('.faq,.srv'))
-          || (cs.display === 'flex' && cs.flexDirection === 'row' && k.children.length > 2 && !k.querySelector('form'));
+          || (cs.display === 'flex' && cs.flexDirection === 'row' && k.children.length > 2 && !k.querySelector('form') && cs.overflowX !== 'auto');
         if (stagger) {
           Array.from(k.children).forEach((c, i) => {
             c.classList.add('rv');
