@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image' },
   icons: { icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/icon.svg', type: 'image/svg+xml' }, { url: '/icon.png', type: 'image/png' }], apple: '/apple-icon.png' },
   robots: { index: true, follow: true },
+  verification: { google: 'Yhf2XIv6NxoZkbgwa1agzh_lHxobsYlYosJx5ErRBaM' },
 };
 
 export const viewport: Viewport = {
