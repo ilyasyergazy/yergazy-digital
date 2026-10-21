@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Кейс: 12 млн ₸ с онлайн-курса без рекламы',
   description: 'Онлайн-курс по торгам на гос. аукционах: сайт с личными кабинетами, YouTube-канал и оплата через Kaspi Pay. Более 2500 покупателей и 12 млн ₸ за 2 месяца без рекламного бюджета.',
   alternates: { canonical: '/cases/course' },
-  openGraph: { title: '12 млн ₸ с курса без рекламы – кейс yergazy digital', images: [{ url: '/og.jpg', width: 1200, height: 630 }] },
+  openGraph: { title: '12 млн ₸ с курса без рекламы – кейс yergazy digital', images: [{ url: '/og/cases/course.jpg', width: 1200, height: 630 }] },
 };
 
 export default function Page() {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Кейс: +1 300 подписчиков и новый стиль Instagram клиники',
   description: 'Комплексное SMM-продвижение клиники здоровья и красоты в Алматы: стратегия, съёмки, единый стиль ленты и реклама. +1 300 подписчиков и охват 115 000 в месяц за 3 месяца.',
   alternates: { canonical: '/medical/cases/instagram' },
-  openGraph: { title: '+1 300 подписчиков за 3 месяца – кейс yergazy medical', images: [{ url: '/og.jpg', width: 1200, height: 630 }] },
+  openGraph: { title: '+1 300 подписчиков за 3 месяца – кейс yergazy medical', images: [{ url: '/og/cases/instagram.jpg', width: 1200, height: 630 }] },
 };
 
 export default function Page() {

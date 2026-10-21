@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Кейс: 500+ заявок для стоматологии',
   description: 'Реклама стоматологии в Instagram: более 500 заявок по средней цене 2.2$, в лучшие месяцы – 1.2-1.6$ за переписку в WhatsApp.',
   alternates: { canonical: '/medical/cases/dentistry' },
-  openGraph: { title: '500+ заявок для стоматологии – кейс yergazy medical', images: [{ url: '/og.jpg', width: 1200, height: 630 }] },
+  openGraph: { title: '500+ заявок для стоматологии – кейс yergazy medical', images: [{ url: '/og/cases/dentistry.jpg', width: 1200, height: 630 }] },
 };
 
 export default function Page() {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Кейс: 5000+ заявок для застройщика',
   description: 'Застройщик из Алматы, 5 жилых проектов: более 5000 заявок по средней цене 3-5$ за 2 года. Реклама в Instagram и Facebook, 150+ креативов.',
   alternates: { canonical: '/cases/realty' },
-  openGraph: { title: '5000+ заявок для застройщика – кейс yergazy digital', images: [{ url: '/og.jpg', width: 1200, height: 630 }] },
+  openGraph: { title: '5000+ заявок для застройщика – кейс yergazy digital', images: [{ url: '/og/cases/realty.jpg', width: 1200, height: 630 }] },
 };
 
 export default function Page() {
