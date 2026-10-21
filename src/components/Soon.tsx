@@ -18,7 +18,7 @@ export default function Soon({ title, text, chip = 'скоро' }: Props) {
           <Link className="sec" href="/">на главную</Link>
         </div>
       </div>
-      <footer>© 2026 yergazy digital · ИП Express Marketing · БИН 941210300892</footer>
+      <footer>© 2026 yergazy digital · ИП EXPRESS MARKETING · ИИН/БИН 941210300892<br />Казахстан, 050060, г. Алматы, ул. Тимирязева, д. 28 В, 612/7 · +7 701 654 56 75</footer>
     </div>
   );
 }
