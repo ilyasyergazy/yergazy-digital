@@ -4,7 +4,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://yergazy.digital';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return ['', '/cases/realty', '/cases/course', '/cases/glass', '/cases/phones', '/medical', '/medical/cases/cosmetology', '/medical/cases/iv-drips', '/medical/cases/instagram', '/medical/cases/dentistry', '/medical/cases/plastic-surgery', '/cases'].map((p) => ({
+  return ['', '/cases/realty', '/cases/course', '/cases/glass', '/cases/phones', '/cases/security', '/medical', '/medical/cases/cosmetology', '/medical/cases/iv-drips', '/medical/cases/instagram', '/medical/cases/dentistry', '/medical/cases/plastic-surgery', '/cases'].map((p) => ({
     url: SITE + p,
     lastModified: now,
     changeFrequency: p ? 'monthly' : 'weekly',
