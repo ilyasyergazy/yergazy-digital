@@ -472,6 +472,24 @@ export function initSite(): () => void {
     z.addEventListener('click', (e) => { const el = e.target as HTMLElement; if (Date.now() - t0 < 600) return; if (el.classList.contains('cg-s') || el.classList.contains('cabov')) close(); });
     swipe(z.querySelector('.cg-v') as HTMLElement, t, () => i, set, null, () => {});
   };
+  document.querySelectorAll<HTMLElement>('.csl').forEach((tr) => {
+    const sec = tr.closest('section') as HTMLElement;
+    const btns = Array.from(sec.querySelectorAll<HTMLButtonElement>('[data-csl]'));
+    if (!btns.length) return;
+    const upd = () => {
+      const max = tr.scrollWidth - tr.clientWidth - 2;
+      btns.forEach((b) => { b.disabled = Number(b.dataset.csl) < 0 ? tr.scrollLeft <= 2 : tr.scrollLeft >= max; });
+    };
+    btns.forEach((b) => b.addEventListener('click', () => {
+      const card = tr.firstElementChild as HTMLElement;
+      const step = card.getBoundingClientRect().width + 20;
+      tr.scrollBy({ left: Number(b.dataset.csl) * step, behavior: 'smooth' });
+    }));
+    tr.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', upd);
+    cleanups.push(() => window.removeEventListener('resize', upd));
+    upd();
+  });
   document.querySelectorAll<HTMLElement>('[data-cab]').forEach((cab) => {
     const track = cab.querySelector('.cab-t') as HTMLElement;
     const imgs = Array.from(track.querySelectorAll('img'));
