@@ -17,6 +17,7 @@ const FORMS: Record<string, string> = {
   task: 'обсудить задачу',
   final: 'форма внизу страницы',
   checklist: 'чек-лист · 10 бесплатных способов',
+  quiz: 'квиз · прогноз заявок (статья для клиник)',
 };
 
 const clean = (v: unknown, max = 200) => String(v ?? '').replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, max);
